@@ -5,16 +5,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
+class CreatePrimaryTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up(): void
     {
         Schema::create('primary', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('custom_datetime')->nullable(false);
             $table->dateTime('custom_datetime')->nullable(false);
             $table->date('custom_date')->default(DB::raw('CURRENT_DATE'))->nullable(false);
             $table->string('username')->nullable(false);
@@ -23,12 +24,11 @@ return new class extends Migration
             $table->float('start_geopoint');
             $table->float('start_geopoint_latitude');
             $table->float('start_geopoint_longitude');
-            $table->float('start_geopoint_longitude');
             $table->float('start_geopoint_precision');
-            $table->sting('fullname_np')->nullable(false);
-            $table->sting('fullname_en')->nullable(false);
-            $table->sting('photo_name')->nullable(false);
-            $table->sting('photo_url')->nullable(false);
+            $table->string('fullname_np')->nullable(false);
+            $table->string('fullname_en')->nullable(false);
+            $table->string('photo_name')->nullable(false);
+            $table->string('photo_url')->nullable(false);
             $table->string('father_name')->nullable(false);
             $table->string('mother_name')->nullable(false);
             $table->string('grandfather_name')->nullable(false);
@@ -59,7 +59,7 @@ return new class extends Migration
             $table->boolean('is_has_contact_person')->default(0);
             $table->string('other_contact_person_name');
             $table->integer('other_contact_person_number');
-            $table->string("seasonal_home_stayer");
+            $table->string('seasonal_home_stayer');
             $table->integer('family_member_count');
             $table->integer('family_death');
             $table->string('health_checkup');
@@ -71,9 +71,9 @@ return new class extends Migration
             $table->boolean('health_checkup_HCU006')->default(0);
             $table->boolean('health_checkup_HCU007')->default(0);
             $table->boolean('health_checkup_others');
-            $table->string('perodic_pregenancy_test');
-            $table->string('no_perodic_pregnancy_test_reason');
-            $table->string('no_perodic_pregnancy_test_reason_other');
+            $table->string('periodic_pregnancy_test');
+            $table->string('no_periodic_pregnancy_test_reason');
+            $table->string('no_periodic_pregnancy_test_reason_other');
             $table->string('baby_delivery_place');
             $table->string('baby_delivery_place_other');
             $table->string('baby_delivery_helper');
@@ -106,8 +106,8 @@ return new class extends Migration
             $table->boolean('has_rent_social_security_');
             $table->string('drinking_water_source');
             $table->string('drinking_water_source_other');
-            $table->string('drinking_water_purification_procress');
-            $table->string('drinking_water_purification_procress_other');
+            $table->string('drinking_water_purification_process');
+            $table->string('drinking_water_purification_process_other');
             $table->string('cooking_fuel');
             $table->string('cooking_fuel_other');
             $table->string('cooking_stove');
@@ -236,7 +236,7 @@ return new class extends Migration
             $table->string('local_dev_comm_contribution');
             $table->boolean('has_involvment_in_other_org')->default(0);
             $table->string('organization');
-            $table->string('riaky_natural_disaster');
+            $table->string('risky_natural_disaster');
             $table->boolean('risky_natural_disaster_ND01')->default(0);
             $table->boolean('risky_natural_disaster_ND02')->default(0);
             $table->boolean('risky_natural_disaster_ND03')->default(0);
@@ -262,15 +262,14 @@ return new class extends Migration
             $table->float('tax_paid');
             $table->string('income_sufficient_for_months');
             $table->string('thumb_left');
-            $table->string('thumb__left_url');
+            $table->string('thumb_left_url');
             $table->string('thumb_right');
             $table->string('thumb_right_url');
-            $table->integer('id');
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->timestamp('submission_time');
             $table->string('_validation_status');
             $table->string('_status');
-            $table->string('_sbumitted_by');
+            $table->string('_submitted_by');
             $table->string('version');
             $table->string('__version__');
             $table->string('_tags');
@@ -281,9 +280,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down(): void
     {
         Schema::dropIfExists('primary');
     }
-};
+}
